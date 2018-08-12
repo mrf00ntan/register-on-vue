@@ -27,41 +27,16 @@ export default {
       error: false,
       email: '',
       password: '',
-      download: false,
-      users: {
-        'tester': {
-          'email': 'mrf00ntan@gmail.com',
-          'name': 'Тестер',
-          'surname': 'Тестеров',
-          'password': 'passpass'
-        },
-        'tester2': {
-          'email': 'example@gmail.com',
-          'name': 'Тестер2',
-          'surname': 'Тестеров2',
-          'password': '123123'
-        }
-      }
+      download: false
     }
   },
   methods: {
     submitForm(){
       var email = this.email;
       var password = this.password;
-      for(var userKey in this.users){
-        var arr = this.users[userKey];
-        if(email == arr['email'] && password == arr['password']){
-          this.download = true;
-          this.$session.set('username', userKey);
-          this.$session.set('name', arr['name']);
-          this.$session.set('surname', arr['surname']);
-          this.$session.set('email', email);
-          window.location.replace("/profile");
-          break;
-        } else {
-          this.error = true;
-        }
-      }
+      this.$session.set('email', email);
+      this.download = true;
+      window.location.replace("/profile");
     },
     clearError(){
       this.error = false;
